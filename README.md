@@ -65,3 +65,14 @@ overwritten in place with the release file name and '[path removed]'. WvData (si
 
 ## Privacy
 No names or hospital numbers remain. Recording dates were only in the removed FilePath strings; scans.tsv acq_time is n/a.
+
+## Units
+No unit is stated for the recordings: not in README.txt or on the record page, not in the paper's text or captions, and the
+SmrData structs have no unit or scale field. channels.tsv and the .vhdr headers (unit n/a, resolution 1) therefore keep n/a,
+and the values are as released. MNE returns the stored numbers unscaled: read_raw_brainvision types every channel misc, and
+read_raw_bids types the channels from channels.tsv and labels the DBS channels volts without rescaling.
+Supporting evidence, not a stated unit: in the four single-pulse recordings with isolated pulses (sub-06 and sub-07, left and
+right), the median evoked neural activity (ENA) amplitude per contact (peak to following trough, 700 Hz low-pass) is 1.03
+times (median ratio; IQR 0.97-1.11, 28 contacts) the values on the µV axes of Wiest et al. (2022) Fig. 4C-F. The stored DBS
+numbers thus appear to be on the paper's µV scale: compare them with the paper as stored (times 1e-6 for volts). The sub-05
+file has no isolated pulses, so Fig. 4B is not compared. Method and tables: code/receipts/2026-10-22_units-na-ena-comparison.md.
